@@ -35,7 +35,7 @@ local function render()
   if vertical then
     barWidget.setText(coolant)
   elseif displayMode == "compact" then
-    barWidget.setText(coolant .. " · P " .. pump)
+    barWidget.setText(coolant)
   else
     barWidget.setText(
       coolant
