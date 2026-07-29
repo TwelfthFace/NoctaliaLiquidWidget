@@ -1,0 +1,128 @@
+id = "danta/liquidctl-control"
+name = "Liquidctl Control"
+version = "0.1.1"
+min_noctalia = "5.0.0"
+author = "danta"
+license = "MIT"
+dependencies = []
+tags = ["hardware", "monitoring", "rgb", "cooling"]
+icon = "droplet"
+description = "Monitor Commander Pro coolant, radiator fan and pump speeds, and control Commander Pro and ASUS Aura lighting."
+
+[[widget]]
+id = "cooling"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "display_mode"
+  type = "select"
+  label = "Bar detail"
+  description = "Full shows every radiator fan and the pump. Compact shows coolant and pump only."
+  default = "full"
+  options = [
+    { value = "full", label = "Full" },
+    { value = "compact", label = "Compact" },
+  ]
+
+[[service]]
+id = "controller"
+entry = "service.luau"
+
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 520
+height = 650
+placement = "floating"
+position = "center"
+
+[[setting]]
+key = "liquidctl_path"
+type = "string"
+label = "liquidctl executable"
+description = "Executable name or absolute path used for lighting commands and the telemetry fallback."
+default = "liquidctl"
+
+[[setting]]
+key = "commander_match"
+type = "string"
+label = "Commander Pro match"
+description = "Value passed to liquidctl --match for the Commander Pro."
+default = "Commander PRO"
+
+[[setting]]
+key = "aura_match"
+type = "string"
+label = "ASUS Aura match"
+description = "Value passed to liquidctl --match for the ASUS Aura controller."
+default = "ASUS Aura LED Controller"
+
+[[setting]]
+key = "aura_pick"
+type = "int"
+label = "ASUS Aura pick index"
+description = "Selects the correct Aura interface when liquidctl finds more than one. The known working waterblock interface is 0."
+default = 0
+min = 0
+max = 16
+step = 1
+
+[[setting]]
+key = "aura_channel"
+type = "select"
+label = "ASUS Aura channel"
+description = "The Aura effect channel controlled by the panel. Sync controls every channel exposed by that controller."
+default = "sync"
+options = [
+  { value = "sync", label = "Sync (all channels)" },
+  { value = "led1", label = "LED 1 (12 V RGB)" },
+  { value = "led2", label = "LED 2 (ARGB)" },
+  { value = "led3", label = "LED 3 (ARGB)" },
+  { value = "led4", label = "LED 4 (ARGB)" },
+]
+
+[[setting]]
+key = "temperature_sensor"
+type = "int"
+label = "Coolant probe"
+description = "Commander Pro temperature probe number used as coolant temperature."
+default = 1
+min = 1
+max = 4
+step = 1
+
+[[setting]]
+key = "poll_interval_ms"
+type = "int"
+label = "Telemetry interval"
+description = "How often the plugin reads coolant, radiator fan and pump telemetry, in milliseconds."
+default = 2000
+min = 1000
+max = 30000
+step = 500
+
+[[setting]]
+key = "privilege_mode"
+type = "select"
+label = "Lighting command privilege"
+description = "Direct is best with liquidctl udev rules. pkexec opens a graphical authorization prompt. sudo -n only works with an existing non-interactive sudo policy."
+default = "direct"
+options = [
+  { value = "direct", label = "Direct (udev permissions)" },
+  { value = "pkexec", label = "pkexec" },
+  { value = "sudo-n", label = "sudo -n" },
+]
+
+[[setting]]
+key = "commander_lighting_enabled"
+type = "bool"
+label = "Control Commander Pro lighting"
+description = "Include both Commander Pro LED channels when All devices is selected."
+default = true
+
+[[setting]]
+key = "aura_lighting_enabled"
+type = "bool"
+label = "Control ASUS Aura lighting"
+description = "Include the configured ASUS Aura interface when All devices is selected."
+default = true
