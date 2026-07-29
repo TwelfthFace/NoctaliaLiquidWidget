@@ -302,7 +302,18 @@ local function render()
           flexGrow = 1,
         }),
       }),
-      ui.button({ glyph = "close", variant = "ghost", onClick = "onCloseClicked" }),
+      ui.button({
+        glyph = "settings",
+        variant = "ghost",
+        tooltip = "Plugin settings",
+        onClick = "onOpenSettingsClicked",
+      }),
+      ui.button({
+        glyph = "close",
+        variant = "ghost",
+        tooltip = "Close",
+        onClick = "onCloseClicked",
+      }),
     }),
     ui.scroll({ flexGrow = 1, gap = 16 }, {
       telemetrySection(),
@@ -352,6 +363,17 @@ end
 
 function onCloseClicked()
   panel.close()
+end
+
+function onOpenSettingsClicked()
+  local started = noctalia.runAsync("noctalia msg settings-open plugins", function(result)
+    if result.timedOut == true or tonumber(result.exitCode) ~= 0 then
+      noctalia.notifyError("Liquidctl Control", "Unable to open Noctalia plugin settings")
+    end
+  end, 5000)
+  if not started then
+    noctalia.notifyError("Liquidctl Control", "Unable to open Noctalia plugin settings")
+  end
 end
 
 function onRefreshStatus()

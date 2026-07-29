@@ -11,10 +11,11 @@ A native Luau plugin for Noctalia `v5.0.0-beta1` that:
 The plugin only controls lighting. It never changes fan or pump curves, and it
 does not use `--unsafe=high_temperature`.
 
-Version `0.1.1` performs USB-backed hwmon reads outside Noctalia's time-limited
+Version `0.1.2` performs USB-backed hwmon reads outside Noctalia's time-limited
 Luau callbacks and batches each lighting action into one asynchronous command.
 This prevents the beta1 runtime from disabling the controller service after
-repeated callback timeouts.
+repeated callback timeouts. Its panel header also provides a settings button
+that opens Noctalia's Plugins settings page.
 
 ## Install
 
@@ -43,13 +44,13 @@ Then:
 For development, point the source at any parent directory that directly
 contains the `liquidctl-control` folder.
 
-### Upgrade from 0.1.0
+### Upgrade from 0.1.0 or 0.1.1
 
 Overwrite the existing plugin directory, then disable and re-enable the plugin
 to create a fresh controller runtime:
 
 ```sh
-unzip -o noctalia-liquidctl-control-v0.1.1.zip \
+unzip -o noctalia-liquidctl-control-v0.1.2.zip \
   -d ~/.local/share/noctalia-local-plugins
 noctalia msg plugins disable danta/liquidctl-control
 noctalia msg plugins enable danta/liquidctl-control

@@ -1,6 +1,6 @@
 id = "danta/liquidctl-control"
 name = "Liquidctl Control"
-version = "0.1.1"
+version = "0.1.2"
 min_noctalia = "5.0.0"
 author = "danta"
 license = "MIT"
