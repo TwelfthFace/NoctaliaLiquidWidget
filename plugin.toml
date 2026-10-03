@@ -8,6 +8,7 @@ dependencies = []
 tags = ["hardware", "monitoring", "rgb", "cooling"]
 icon = "droplet"
 description = "Monitor Commander Pro coolant, radiator fan and pump speeds, and control Commander Pro and ASUS Aura lighting."
+plugin_api = 30
 
 [[widget]]
 id = "cooling"
@@ -16,12 +17,12 @@ entry = "widget.luau"
   [[widget.setting]]
   key = "display_mode"
   type = "select"
-  label = "Bar detail"
-  description = "Full shows every radiator fan and the pump. Compact shows coolant and pump only."
+  label_key = "settings.widget.entry-0.display-mode.label"
+  description_key = "settings.widget.entry-0.display-mode.description"
   default = "full"
   options = [
-    { value = "full", label = "Full" },
-    { value = "compact", label = "Compact" },
+    { value = "full", label_key = "settings.widget.entry-0.display-mode.options.option-0" },
+    { value = "compact", label_key = "settings.widget.entry-0.display-mode.options.option-1" },
   ]
 
 [[service]]
@@ -39,29 +40,29 @@ position = "center"
 [[setting]]
 key = "liquidctl_path"
 type = "string"
-label = "liquidctl executable"
-description = "Executable name or absolute path used for lighting commands and the telemetry fallback."
+label_key = "settings.liquidctl-path.label"
+description_key = "settings.liquidctl-path.description"
 default = "liquidctl"
 
 [[setting]]
 key = "commander_match"
 type = "string"
-label = "Commander Pro match"
-description = "Value passed to liquidctl --match for the Commander Pro."
+label_key = "settings.commander-match.label"
+description_key = "settings.commander-match.description"
 default = "Commander PRO"
 
 [[setting]]
 key = "aura_match"
 type = "string"
-label = "ASUS Aura match"
-description = "Value passed to liquidctl --match for the ASUS Aura controller."
+label_key = "settings.aura-match.label"
+description_key = "settings.aura-match.description"
 default = "ASUS Aura LED Controller"
 
 [[setting]]
 key = "aura_pick"
 type = "int"
-label = "ASUS Aura pick index"
-description = "Selects the correct Aura interface when liquidctl finds more than one. The known working waterblock interface is 0."
+label_key = "settings.aura-pick.label"
+description_key = "settings.aura-pick.description"
 default = 0
 min = 0
 max = 16
@@ -70,22 +71,22 @@ step = 1
 [[setting]]
 key = "aura_channel"
 type = "select"
-label = "ASUS Aura channel"
-description = "The Aura effect channel controlled by the panel. Sync controls every channel exposed by that controller."
+label_key = "settings.aura-channel.label"
+description_key = "settings.aura-channel.description"
 default = "sync"
 options = [
-  { value = "sync", label = "Sync (all channels)" },
-  { value = "led1", label = "LED 1 (12 V RGB)" },
-  { value = "led2", label = "LED 2 (ARGB)" },
-  { value = "led3", label = "LED 3 (ARGB)" },
-  { value = "led4", label = "LED 4 (ARGB)" },
+  { value = "sync", label_key = "settings.aura-channel.options.option-0" },
+  { value = "led1", label_key = "settings.aura-channel.options.option-1" },
+  { value = "led2", label_key = "settings.aura-channel.options.option-2" },
+  { value = "led3", label_key = "settings.aura-channel.options.option-3" },
+  { value = "led4", label_key = "settings.aura-channel.options.option-4" },
 ]
 
 [[setting]]
 key = "temperature_sensor"
 type = "int"
-label = "Coolant probe"
-description = "Commander Pro temperature probe number used as coolant temperature."
+label_key = "settings.temperature-sensor.label"
+description_key = "settings.temperature-sensor.description"
 default = 1
 min = 1
 max = 4
@@ -94,8 +95,8 @@ step = 1
 [[setting]]
 key = "poll_interval_ms"
 type = "int"
-label = "Telemetry interval"
-description = "How often the plugin reads coolant, radiator fan and pump telemetry, in milliseconds."
+label_key = "settings.poll-interval-ms.label"
+description_key = "settings.poll-interval-ms.description"
 default = 2000
 min = 1000
 max = 30000
@@ -104,25 +105,25 @@ step = 500
 [[setting]]
 key = "privilege_mode"
 type = "select"
-label = "Lighting command privilege"
-description = "Direct is best with liquidctl udev rules. pkexec opens a graphical authorization prompt. sudo -n only works with an existing non-interactive sudo policy."
+label_key = "settings.privilege-mode.label"
+description_key = "settings.privilege-mode.description"
 default = "direct"
 options = [
-  { value = "direct", label = "Direct (udev permissions)" },
-  { value = "pkexec", label = "pkexec" },
-  { value = "sudo-n", label = "sudo -n" },
+  { value = "direct", label_key = "settings.privilege-mode.options.option-0" },
+  { value = "pkexec", label_key = "settings.privilege-mode.options.option-1" },
+  { value = "sudo-n", label_key = "settings.privilege-mode.options.option-2" },
 ]
 
 [[setting]]
 key = "commander_lighting_enabled"
 type = "bool"
-label = "Control Commander Pro lighting"
-description = "Include both Commander Pro LED channels when All devices is selected."
+label_key = "settings.commander-lighting-enabled.label"
+description_key = "settings.commander-lighting-enabled.description"
 default = true
 
 [[setting]]
 key = "aura_lighting_enabled"
 type = "bool"
-label = "Control ASUS Aura lighting"
-description = "Include the configured ASUS Aura interface when All devices is selected."
+label_key = "settings.aura-lighting-enabled.label"
+description_key = "settings.aura-lighting-enabled.description"
 default = true

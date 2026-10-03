@@ -1,6 +1,6 @@
 --!nonstrict
 
-local displayMode = tostring(barWidget.getConfig("display_mode") or "full")
+local displayMode = tostring(noctalia.getConfig("display_mode") or "full")
 local status = noctalia.state.get("cooling_status")
 
 local function temperatureText(value)
