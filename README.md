@@ -1,6 +1,6 @@
 # Liquidctl Control for Noctalia 5
 
-A native Luau plugin for Noctalia `v5.0.0-beta1` that:
+A native Luau plugin for Noctalia `v5.0.1` that:
 
 - shows Commander Pro coolant temperature in the bar;
 - shows radiator Fan 1–3 and Pump/Fan 4 RPM in the bar and popup;
